@@ -1,27 +1,21 @@
 import React from 'react';
 import { User } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section className="relative py-14">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
-          className="rounded-2xl border border-slate-200/70 bg-white/60 p-6 backdrop-blur"
-        >
-          <div className="flex items-center gap-2">
-            <User className="h-5 w-5 text-sky-700" />
-            <h2 className="text-lg font-medium text-slate-900">About</h2>
-          </div>
-          <p className="mt-3 text-slate-600">
-            I write toward human connection and the subtle geographies of care. This is a small room for tenderness—
-            pigeon blue light, acacia shade, a hibiscus flare at the edge of vision.
+    <section id="about" className="mx-auto max-w-3xl px-4 py-14">
+      <div className="flex items-start gap-3">
+        <div className="rounded-lg bg-slate-100 p-2 text-slate-700">
+          <User className="h-5 w-5" />
+        </div>
+        <div>
+          <h2 className="text-xl font-semibold tracking-tight text-slate-900">Tentang Penulis</h2>
+          <p className="mt-2 text-slate-600 leading-relaxed">
+            Aku menulis puisi pendek tentang hal-hal kecil yang sering luput—gesekan angin, tatap yang
+            tertahan, dan cara kota menyimpan sunyi. Situs ini adalah ruang yang lebih tenang untuk
+            menyimpan kata-kata itu.
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
