@@ -1,73 +1,72 @@
-import { Mail, Instagram, Link as LinkIcon } from "lucide-react";
+import React, { useState } from 'react';
+import { Mail, Share2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
   return (
-    <section id="contact" className="relative">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="rounded-3xl border border-sky-100 bg-white/70 p-8 shadow-sm backdrop-blur-sm">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div>
-              <h2 className="font-serif text-3xl text-slate-900">Connect</h2>
-              <p className="mt-2 text-slate-700">
-                For readings, collaborations, or just to say hello.
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a
-                  href="mailto:hello@example.com"
-                  className="inline-flex items-center gap-2 rounded-full bg-sky-700 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
-                >
-                  <Mail className="h-4 w-4" /> Email
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-medium text-sky-800 shadow-sm transition hover:bg-white/80"
-                >
-                  <Instagram className="h-4 w-4" /> Instagram
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-medium text-sky-800 shadow-sm transition hover:bg-white/80"
-                >
-                  <LinkIcon className="h-4 w-4" /> Linktree
-                </a>
-              </div>
-            </div>
-            <div>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700">Name</label>
-                  <input
-                    type="text"
-                    className="mt-1 w-full rounded-lg border border-sky-200 bg-white/70 px-3 py-2 text-slate-800 shadow-inner outline-none ring-0 placeholder:text-slate-400 focus:border-sky-300"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700">Email</label>
-                  <input
-                    type="email"
-                    className="mt-1 w-full rounded-lg border border-sky-200 bg-white/70 px-3 py-2 text-slate-800 shadow-inner outline-none ring-0 placeholder:text-slate-400 focus:border-sky-300"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700">Message</label>
-                  <textarea
-                    rows="4"
-                    className="mt-1 w-full rounded-lg border border-sky-200 bg-white/70 px-3 py-2 text-slate-800 shadow-inner outline-none ring-0 placeholder:text-slate-400 focus:border-sky-300"
-                    placeholder="A note, a question, or a poem."
-                  />
-                </div>
-                <button
-                  type="button"
-                  className="rounded-full bg-sky-700 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
-                >
-                  Send
-                </button>
-              </form>
-            </div>
+    <section className="relative py-16">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7 }}
+          className="overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-6 backdrop-blur"
+        >
+          <div className="flex items-center gap-2">
+            <Mail className="h-5 w-5 text-sky-700" />
+            <h3 className="text-lg font-medium text-slate-900">Connect</h3>
           </div>
-        </div>
+          <p className="mt-2 text-sm text-slate-600">
+            Write a brief note. I will read it when the room is quiet.
+          </p>
+
+          <form onSubmit={onSubmit} className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <input
+              type="text"
+              required
+              placeholder="Your name"
+              className="col-span-1 rounded-lg border border-slate-300/70 bg-white/80 px-3 py-2 text-slate-800 placeholder-slate-400 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+            />
+            <input
+              type="email"
+              required
+              placeholder="Email"
+              className="col-span-1 rounded-lg border border-slate-300/70 bg-white/80 px-3 py-2 text-slate-800 placeholder-slate-400 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+            />
+            <textarea
+              required
+              placeholder="Your message"
+              rows={4}
+              className="col-span-1 sm:col-span-2 rounded-lg border border-slate-300/70 bg-white/80 px-3 py-2 text-slate-800 placeholder-slate-400 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+            />
+            <div className="col-span-1 sm:col-span-2 flex items-center gap-3">
+              <button
+                type="submit"
+                className="rounded-lg bg-sky-600 px-4 py-2 text-white shadow-sm transition-colors hover:bg-sky-700"
+              >
+                Send
+              </button>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900"
+              >
+                <Share2 className="h-4 w-4" />
+                Share
+              </a>
+              {sent && (
+                <span className="text-sm text-green-600">Sent. Thank you.</span>
+              )}
+            </div>
+          </form>
+        </motion.div>
       </div>
     </section>
   );

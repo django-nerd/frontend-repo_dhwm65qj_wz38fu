@@ -1,50 +1,54 @@
-import { useEffect, useState } from "react";
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const works = [
+  {
+    title: 'Birdsong at Dusk',
+    excerpt:
+      'pigeon blue sky, a single note / crossing the quiet street to where you stand',
+  },
+  {
+    title: 'Acacia Noon',
+    excerpt:
+      'under the acacia, we count the soft wind / each leaf practicing your name',
+  },
+  {
+    title: 'Hibiscus Hour',
+    excerpt:
+      'a red that listens / then leaves the room without closing the door',
+  },
+];
 
 function PoemCard({ title, excerpt }) {
   return (
-    <div className="group rounded-2xl border border-sky-100 bg-white/70 p-6 shadow-sm backdrop-blur-sm transition hover:shadow-md">
-      <h3 className="font-serif text-xl text-slate-800">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{excerpt}</p>
-    </div>
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.6 }}
+      className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-6 shadow-sm backdrop-blur"
+    >
+      <h3 className="text-lg font-medium text-slate-900">{title}</h3>
+      <p className="mt-3 text-slate-600">{excerpt}</p>
+      <div className="pointer-events-none absolute -bottom-10 right-0 h-28 w-28 rounded-full bg-purple-300/20 blur-2xl transition-transform duration-700 group-hover:translate-y-2" />
+    </motion.article>
   );
 }
 
 export default function SelectedWorks() {
-  const [works, setWorks] = useState([
-    {
-      title: "Pigeon Letters",
-      excerpt:
-        "The city loosens its knots at dusk; a winged envelope opening above the train yard.",
-    },
-    {
-      title: "Acacia Noon",
-      excerpt:
-        "Under a patient canopy, we inventory our shadows and call it tenderness.",
-    },
-    {
-      title: "Hibiscus Theory",
-      excerpt:
-        "A red syllable opens in the throat of morning, explaining nothing beautifully.",
-    },
-  ]);
-
   return (
-    <section id="works" className="relative">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-8 flex items-end justify-between">
+    <section className="relative py-14">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-6 flex items-end justify-between">
           <div>
-            <h2 className="font-serif text-3xl text-slate-900">Selected Works</h2>
-            <p className="mt-1 text-slate-600">Fragments and poems from an ongoing manuscript.</p>
+            <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Selected Works</h2>
+            <p className="mt-1 text-sm text-slate-500">A few doors to step through, gently.</p>
           </div>
-          <a href="#contact" className="text-sm font-medium text-sky-800 hover:underline">
-            Request full manuscript
-          </a>
         </div>
-
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {works.map((w) => (
-            <PoemCard key={w.title} title={w.title} excerpt={w.excerpt} />)
-          )}
+            <PoemCard key={w.title} title={w.title} excerpt={w.excerpt} />
+          ))}
         </div>
       </div>
     </section>

@@ -1,24 +1,44 @@
+import React from 'react';
+import { Bird, Leaf, Flower2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const items = [
+  { icon: Bird, label: 'Pigeon', hint: 'letters carried across a blue morning' },
+  { icon: Leaf, label: 'Acacia', hint: 'shade that remembers your name' },
+  { icon: Flower2, label: 'Hibiscus', hint: 'a brief, scarlet attention' },
+];
+
 export default function SymbolsStrip() {
   return (
-    <div className="relative isolate">
-      <div className="pointer-events-none absolute inset-0 opacity-30 [background:radial-gradient(120px_120px_at_10%_40%,theme(colors.sky.200)_0%,transparent_60%),radial-gradient(140px_140px_at_90%_30%,theme(colors.sky.100)_0%,transparent_60%),radial-gradient(160px_160px_at_50%_90%,theme(colors.sky.50)_0%,transparent_60%)]" />
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-6 py-10 sm:grid-cols-3">
-        <div className="rounded-xl border border-sky-100 bg-white/70 p-4 text-center shadow-sm backdrop-blur-sm">
-          <div className="mx-auto size-14 rounded-full bg-gradient-to-br from-sky-100 to-white ring-1 ring-sky-200/60" />
-          <h3 className="mt-3 font-medium text-slate-800">Pigeon</h3>
-          <p className="text-sm text-slate-600">City-blue messenger of ordinary miracles.</p>
-        </div>
-        <div className="rounded-xl border border-sky-100 bg-white/70 p-4 text-center shadow-sm backdrop-blur-sm">
-          <div className="mx-auto size-14 rounded-full bg-gradient-to-br from-emerald-50 to-white ring-1 ring-emerald-200/60" />
-          <h3 className="mt-3 font-medium text-slate-800">Acacia</h3>
-          <p className="text-sm text-slate-600">Shade and shelter; the patience of trees.</p>
-        </div>
-        <div className="rounded-xl border border-sky-100 bg-white/70 p-4 text-center shadow-sm backdrop-blur-sm">
-          <div className="mx-auto size-14 rounded-full bg-gradient-to-br from-rose-50 to-white ring-1 ring-rose-200/60" />
-          <h3 className="mt-3 font-medium text-slate-800">Hibiscus</h3>
-          <p className="text-sm text-slate-600">Brief flare of color, like a heartbeat.</p>
+    <section className="relative py-10">
+      <div className="pointer-events-none absolute inset-0 -z-[1]">
+        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-200/30 blur-3xl" />
+      </div>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {items.map((it, idx) => (
+            <motion.div
+              key={it.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
+              className="group relative overflow-hidden rounded-xl border border-slate-200/70 bg-white/60 p-5 backdrop-blur hover:bg-white/80"
+            >
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-sky-50 text-sky-700 ring-1 ring-sky-200/60">
+                  <it.icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="text-slate-900">{it.label}</div>
+                  <div className="text-sm text-slate-500">{it.hint}</div>
+                </div>
+              </div>
+              <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-sky-300/20 blur-2xl transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-1" />
+            </motion.div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
